@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lease Agreement — Verandah Properties, LLC</title>
+<style>
+  :root {
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --border: #e5e5e5;
+    --accent: #008C82;
+    --bg: #ffffff;
+    --bg-soft: #fafafa;
+    --nav-bg: #ffffff;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.65;
+    font-size: 16px;
+  }
+
+  /* Sticky top nav */
+  .topnav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .topnav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .brand {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+    letter-spacing: 0.01em;
+  }
+
+  .brand small {
+    display: block;
+    font-weight: 400;
+    color: var(--muted);
+    font-size: 0.78rem;
+    margin-top: 2px;
+  }
+
+  .nav-toggle {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .nav-toggle:hover { opacity: 0.9; }
+
+  .nav-menu {
+    display: none;
+    border-top: 1px solid var(--border);
+    background: var(--bg-soft);
+  }
+
+  .nav-menu.open { display: block; }
+
+  .nav-menu-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 12px 24px;
+  }
+
+  .nav-menu ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+    counter-reset: nav-counter;
+  }
+
+  @media (min-width: 600px) {
+    .nav-menu ol { grid-template-columns: 1fr 1fr; }
+  }
+
+  .nav-menu li {
+    counter-increment: nav-counter;
+  }
+
+  .nav-menu a {
+    display: block;
+    padding: 8px 12px;
+    color: var(--text);
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+
+  .nav-menu a::before {
+    content: counter(nav-counter) ". ";
+    color: var(--muted);
+    margin-right: 4px;
+  }
+
+  .nav-menu a:hover {
+    background: white;
+    color: var(--accent);
+  }
+
+  /* Main content */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+
+  .doc-header {
+    text-align: center;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+
+  .doc-header h1 {
+    font-size: 1.75rem;
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+
+  .doc-header .company {
+    font-size: 1.1rem;
+    color: var(--text);
+    margin: 0 0 4px;
+  }
+
+  .doc-header .address {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  section {
+    margin-bottom: 48px;
+    scroll-margin-top: 80px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0 0 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent);
+  }
+
+  h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 32px 0 12px;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 20px 0 8px;
+  }
+
+  p {
+    margin: 0 0 16px;
+  }
+
+  .placeholder {
+    background: #fff8e1;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.88em;
+    color: #8a6d00;
+  }
+
+  .fee-list {
+    background: var(--bg-soft);
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    margin: 16px 0;
+    list-style: none;
+  }
+
+  .fee-list li {
+    padding: 4px 0;
+    display: flex;
+    align-items: baseline;
+  }
+
+  .fee-list .amount {
+    font-weight: 600;
+    min-width: 110px;
+    display: inline-block;
+  }
+
+  .fee-list .label {
+    color: var(--muted);
+  }
+
+  .fee-list-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  ul, ol { padding-left: 24px; margin: 0 0 16px; }
+  li { margin-bottom: 6px; }
+
+  .alphalist { list-style-type: upper-alpha; }
+  .romanlist { list-style-type: lower-roman; }
+
+  .legal-notice {
+    background: #f5f5f5;
+    border: 1px solid var(--border);
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 0.92rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+  }
+
+  .initial-block {
+    background: var(--bg-soft);
+    border: 1px dashed var(--border);
+    padding: 16px;
+    margin: 24px 0;
+    text-align: center;
+    border-radius: 4px;
+  }
+
+  .initial-block p {
+    margin: 0 0 8px;
+    font-weight: 500;
+  }
+
+  .initial-line {
+    display: inline-block;
+    border-bottom: 1px solid var(--text);
+    min-width: 80px;
+    padding: 4px 8px;
+    margin-top: 4px;
+  }
+
+  .signature-block {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 32px;
+    padding: 24px;
+    background: var(--bg-soft);
+    border-radius: 6px;
+  }
+
+  @media (min-width: 600px) {
+    .signature-block { grid-template-columns: 1fr 1fr; }
+  }
+
+  .sig-field {
+    border-bottom: 1px solid var(--text);
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+    min-height: 32px;
+  }
+
+  .sig-label {
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .back-to-top.visible { display: flex; }
+
+  @media print {
+    .topnav, .back-to-top { display: none; }
+    main { max-width: 100%; padding: 0; }
+    section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="brand">
+      Lease Agreement
+      <small>Verandah Properties, LLC</small>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button>
+  </div>
+  <div class="nav-menu" id="navMenu">
+    <div class="nav-menu-inner">
+      <ol>
+        <li><a href="#section-1">Lease Terms</a></li>
+        <li><a href="#section-2">Required Insurance</a></li>
+        <li><a href="#section-3">Maintenance Responsibility</a></li>
+        <li><a href="#section-4">Mold Addendum</a></li>
+        <li><a href="#section-5">Resident Benefits Package</a></li>
+        <li><a href="#section-6">Sign and Accept</a></li>
+      </ol>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <header class="doc-header">
+    <h1>Lease Agreement</h1>
+    <p class="company">Verandah Properties, LLC</p>
+    <p class="address">4767 New Broad Street • Orlando, FL 32814 • (407) 855-0331</p>
+  </header>
+
+  <!-- ============ SECTION 1 ============ -->
+  <section id="section-1">
+    <h2>1. Lease Terms</h2>
+
+    <h3>1.1 Term and Possession</h3>
+    <p>This agreement, made this <span class="placeholder">&lt;&lt;Lease Creation Date&gt;&gt;</span>, is by and between Verandah Properties, LLC, hereinafter referred to as the Landlord's Agent, and <span class="placeholder">&lt;&lt;Tenants (Financially Responsible)&gt;&gt;</span> hereinafter referred to as the Tenant(s). The Landlord leases to Tenant(s) and the Tenant(s) rent from the Landlord a residence located at <span class="placeholder">&lt;&lt;Unit Address&gt;&gt;</span>.</p>
+
+    <h4>Term</h4>
+    <p>All rents are due on the first day of the month. The initial term of this lease shall be approximately <span class="placeholder">&lt;&lt;Lease Term (Months)&gt;&gt;</span> months, beginning on the scheduled day of occupancy which is <span class="placeholder">&lt;&lt;Lease Start Date&gt;&gt;</span> and ending <span class="placeholder">&lt;&lt;Lease End Date&gt;&gt;</span> at noon. It is hereby agreed between the Landlord and the Tenant(s) that the above residence shall be used and occupied by Tenants, and animals/pets, as described in the Animal/Pet Agreement, as a private residence and for no other purpose. No additional animals, birds, or pets of any kind shall be permitted on the property without the express written consent of the Landlord.</p>
+
+    <h4>Possession</h4>
+    <p>If there is a delay in delivery of possession by the Landlord, rent shall be abated on a daily basis until possession is granted. If possession is not granted within seven (7) days after the beginning day of initial term, then Tenant(s) may void this Lease Agreement and have full refund of any deposit. Other than rent abatement for those days. If possession is not granted within twenty (20) days after the beginning day of initial term, then Tenant(s) may void this Lease Agreement and have full refund of any deposit. Other than rent abatement for those days. Landlord shall not be liable for damages for delay in possession.</p>
+
+    <h3>1.2 Rent and Security Deposit</h3>
+
+    <ul class="fee-list">
+      <li class="fee-list-title">Due to hold property:</li>
+      <li><span class="amount"><span class="placeholder">&lt;&lt;Security Deposit Charges&gt;&gt;</span></span><span class="label">Security Deposit</span></li>
+      <li><span class="amount">Pet Deposit</span><span class="label">Pet Deposit</span></li>
+    </ul>
+
+    <ul class="fee-list">
+      <li class="fee-list-title">Due prior to moving in:</li>
+      <li><span class="amount">$<span class="placeholder">&lt;&lt;Monthly Rent&gt;&gt;</span></span><span class="label">First Month's Rent</span></li>
+      <li><span class="amount">$225</span><span class="label">Administration Fee</span></li>
+      <li><span class="amount">$75</span><span class="label">Pet Fee (one time) (if applicable)</span></li>
+      <li><span class="amount">$30</span><span class="label">Resident Benefit Package (monthly)</span></li>
+      <li><span class="amount">$20</span><span class="label">Pet Management (monthly) (if applicable)</span></li>
+    </ul>
+
+    <ul class="fee-list">
+      <li class="fee-list-title">Due on the first day of the second month of the lease:</li>
+      <li><span class="amount">Prorated Rent</span><span class="label">Prorated Rent ($0.00 if the lease starts on the first of the month)</span></li>
+    </ul>
+
+    <h4>Rent</h4>
+    <p>Rent of <span class="placeholder">&lt;&lt;Monthly Rent&gt;&gt;</span> is due monthly on the 1st of every month during the term of this Lease Agreement on the first day of each month via online payment through Landlord's Agent website. The software company that processes online payments charges a fee for that service. Any fee for the service to process the rent or other payments will be passed to the Applicant / Tenant at the time Applicant / Tenant makes the payment. That fee is not in the control of the Landlord and is not optional. If rent is paid by another method, other than online payment, there will be an additional twenty-five ($25.00) dollar rent convenience fee for processing; this amount will be due and payable every month that payment is made by anything other than online payments. Tenant(s) understands and agrees to pay this fee when due as outlined. Mailing the rent does not constitute payment. Rent must be received by the Landlord to be considered paid. The initial rent will be at a full month's rental rate.</p>
+    <p><strong>THIRD (3rd) PARTY CHECKS ARE NOT ACCEPTED. NAME ON BANK MONEY ORDER MUST BE THE SAME AS NAME ON LEASE AGREEMENT. ROOMMATES MUST ISSUE PAYMENT FOR RENT ON ONE (1) BANK MONEY ORDER.</strong></p>
+
+    <h4>Security Deposit</h4>
+    <p>Security/Damage Deposit in the amount of ($<span class="placeholder">&lt;&lt;Security Deposit Charges&gt;&gt;</span>) to be paid by the Tenant(s) to the Landlord's Agent, in order to hold the property, shall be retained by the Landlord's Agent for the Tenant's (s') performance of the terms and conditions of this Lease Agreement. Pursuant to Section 83.49, Florida Statutes, Landlord's Agent hereby notifies Tenant(s) that said Security Deposit shall be held in escrow in a non-interest bearing account at: Enterprise Bank &amp; Trust; Address: 189 S. Orange Ave, Suite 1520C Orlando, FL 32801, for the benefit of the Tenant(s). Landlord's Agent may, at his/her option, use all or part of said Security Deposit for any and all damages, of which the Landlord may be entitled, due to the breach of any of the covenants and/or agreements contained herein, by the Tenant(s). Use of said Security Deposit for such purposes shall not act as a waiver to any rights and/or conditions, beyond reasonable wear and tear, so much of said Security Deposit shall be applied toward any/all necessary cleaning and/or repairs.</p>
+    <p>Tenant understands that there will be a Seventy-Five Dollars ($75.00) Security Deposit Processing Fee, if Landlord's Agent must make a claim on the Tenant's deposit. Tenant(s) acknowledge that payment of the security deposit, on the date due as stipulated in the Application Approval Letter, must not be made via credit card. Such a payment method constitutes a material breach of the lease terms and will result in denial of property access. Access will only be granted upon receipt of the security deposit via E-check or Debit Card.</p>
+
+    <p>If the following conditions are not complied with, the cost of labor and materials for cleaning, repairs, and replacements will be deducted from the Security Deposit.</p>
+    <ol>
+      <li>Full term of Lease Agreement has expired and all provisions contained therein have been complied with.</li>
+      <li>Two full calendar months, sixty (60) days notice, must be in given in writing, delivered by certified mail prior to vacating the premises. This notice MUST be mailed and received by CERTIFIED MAIL ONLY to be accepted as proper notice.</li>
+      <li>No damage to premises and/or its contents, beyond normal wear and tear.</li>
+      <li>Entire premises must be cleaned including the carpet cleaning, if applicable.</li>
+      <li>No unpaid late charges and/or contraband pet charges and/or delinquent rents.</li>
+      <li>All debris and rubbish and/or discards will be placed in proper containers.</li>
+      <li>Forwarding address will be left with Landlord.</li>
+      <li>Return of all keys and/or garage door openers to Landlord. In the event that the Landlord does not receive same, Tenant(s) will be responsible for the cost of replacement plus a $75.00 convenience fee for acquiring these items, which will be retained from Tenant's (s') Security Deposit.</li>
+    </ol>
+
+    <p>Security Deposit will be refunded by check, made payable jointly to all persons who signed this Lease Agreement, and mailed to the last known address, within fifteen (15) days, if no claim is made against said Security Deposit by Landlord. Compliance with this section by an individual or business entity authorized to conduct business in this state, including Florida-licensed real estate brokers and salespersons, shall constitute compliance with all other relevant Florida Statutes pertaining to security deposits held pursuant to a rental agreement or other Landlord-Tenant(s) relationship. Enforcement personnel shall look solely to this section to determine compliance. This section prevails over any conflicting provisions in Chapter 475 and in other sections of the Florida Statutes, and shall operate to permit licensed real estate brokers to disburse Security Deposits and deposit monies without having to comply with the notice and settlement procedures contained in s.475.25 (1)(d).</p>
+
+    <p>Tenant(s) acknowledges that this Security Deposit MAY NOT BE APPLIED AS RENT, and agrees that each full month's rent will be paid on time including the last month of occupancy.</p>
+
+    <div class="legal-notice">
+      Your lease requires payment of certain deposits. The Landlord may transfer advance rents to the Landlord's account as they are due and without notice. When you move out, you must give the Landlord your new address so that the Landlord can send you notices regarding your deposit. The Landlord must mail you notice, within 30 days after you move out, of the Landlord's intent to impose a claim against the deposit. If you do not reply to the Landlord stating your objection to the claim within 15 days after receipt of the Landlord's notice, the Landlord will collect the claim and must mail you the remaining deposit, if any. If the Landlord fails to timely mail you notice, the Landlord must return the deposit but may later file a lawsuit against you for damages. If you fail to timely object to a claim, the Landlord may collect from the deposit, but you may later file a lawsuit claiming a refund. You should attempt to informally resolve any dispute before filing a lawsuit. Generally, the party in whose favor a judgment is rendered will be awarded costs and attorney fees payable by the losing party. This disclosure is basic. Please refer to Part II of Chapter 83, Florida Statutes, to determine your legal rights and obligations.
+    </div>
+
+    <h4>4. Late Payments and Returned Checks</h4>
+    <p>Time is of the essence of this Lease Agreement and if rent is not paid by the third (3rd) day of each calendar month, Tenant(s) agrees to pay a late charge of ten percent (10%) of the monthly rent. If a rent payment is returned, for any reason, a service charge of $100.00 will be due, plus the 10% late fee of the rent amount. If a second payment is returned, a service charge of $100.00 will be due, along with 10% late fee; and, all future rent and charges shall be paid at participating establishments provided to tenants along with payment voucher; i.e., 7-11; and an additional $25.00 rent convenience fee will be due and payable for processing anything other than online payments as covered in paragraph 3 above.</p>
+    <p>In the event any rent shall be due and unpaid, or if default shall be made in any of the covenants herein contained, or if said premises shall be abandoned or vacated, then it shall be lawful for said Landlord and/or Landlord's Agent to re-enter and repossess said premises, removing all occupants, and upon re-entry as aforesaid, this Lease Agreement shall terminate. In the event of re-entry by the Landlord or default by the Tenant(s), Tenant(s) shall be liable to the Landlord for all damages incurred, including but not limited to reasonable attorney's fees, court costs, and/or any other costs incurred by the Landlord. If rent is not paid in accordance with the terms of this Lease Agreement and a process server is engaged to deliver a Three (3)-Day Notice, the Tenant(s) will be responsible for the cost of the service, not to exceed $100.00.</p>
+
+    <h3>1.3 Disclosure</h3>
+    <p>For the purpose of notices required by this Lease Agreement, or by law, the following addresses shall be used, unless the parties hereto have been advised in writing otherwise. Verandah Properties, LLC. is acting solely as the agent of the Landlord. <strong>Disclosure Rights:</strong> If someone requests information on you or your rental history for law enforcement, governmental or business purposes, we may provide it.</p>
+    <p><strong>Landlord:</strong> Verandah Properties LLC, 4767 New Broad Street, Orlando FL 32814<br>
+    <strong>Tenant(s):</strong> <span class="placeholder">&lt;&lt;Tenants (Financially Responsible)&gt;&gt;</span>: <span class="placeholder">&lt;&lt;Property Address&gt;&gt;</span></p>
+
+    <h3>1.4 Details</h3>
+    <p><strong>Failure of Landlord to Act:</strong> Failure of the Landlord to insist upon strict compliance with the terms of this Lease Agreement shall not constitute a waiver of any violation.</p>
+
+    <h4>9. Right to Inspect</h4>
+    <p>Tenant(s) shall be given the right to inspect residence, and indicate by notation in writing, on a Move-In Inspection Form any existing damages to the property, in accordance with Florida Law.</p>
+
+    <h4>10. Renewal Term</h4>
+    <p>Either party may terminate this Lease Agreement at the end of the term by giving the other party sixty (60) days written notice. This notice must be POST MARKED no later than 60-days prior to the end of the current lease term to be considered a FULL Sixty (60) Day Notice and the notice must be mailed and received by CERTIFIED MAIL ONLY to be accepted as Proper Notice. If no proper notice is given, then this Lease Agreement will be extended on a Month-to-Month basis (Unless the property is located within a Homeowners Association that does not permit Month-to-Month rental terms) with all terms remaining the same with the exception of the rental rate. With proper constructive notice, the management company reserves the right to raise the rent on a month to month term until terminated by either party by Sixty (60) Days Written Notice. Upon either party receiving said sixty (60) days written notice, Landlord retains the right to display a For Rent and/or For Sale sign and Tenant(s) agrees to cooperate fully and, with reasonable notice, to allow the Landlord's Agents to show the property inside and outside to prospective Tenant/Buyer(s). If lease is renewed, an $80 renewal fee will be due and payable with the rent due the 1st day of the new lease inception date. The lease may not be countersigned by Landlord until fee is paid, and rent may be raised with appropriate notice, until new lease is executed by both parties. If lease is renewed for another 12 months Verandah Properties LLC. will schedule an interim inspection and take digital date stamped interior pictures of the home.</p>
+
+    <h4>11. Sub-Let</h4>
+    <p>Tenant(s) may not sub-let residence or assign this Lease Agreement, without Landlord's express written consent.</p>
+
+    <h4>12. Right of Access</h4>
+    <p>Tenant(s) agrees to permit the Landlord or Landlord's Agent to periodically enter the premises in order to inspect the premises, make necessary and/or agreed repairs, decorations, alterations, or improvements; supply agreed services; or, exhibit the premises to prospective and/or actual purchasers, mortgagees, Tenant(s), workmen or contractors, or in the event of an emergency. Further Tenant understands and agrees that there will be periodic interim inspections to check on the condition of the property. Tenant understands that Landlord's Agent will provide Tenant with 24 hours' notice via email to notify Tenant that an inspection is required. Tenant agrees to schedule an inspection during normal business hours, within 72 hours of notification being given, and will either meet the Landlord's Agent for the inspection or give permission for Landlord's Agent to enter and inspect the property at a pre-arranged time. Tenant will ensure that all pets are removed or caged for the inspection.</p>
+    <p>If Tenant fails to schedule the Inspection appointment during the 72 hours' notification period, there will be a $50.00 rescheduling fee; Tenant agrees to pay this fee along with the following month's rent. Further if Tenant schedules with Landlord's Agent but does not show up for the appointment, or if the Tenant has given permission for Landlord's Agent to perform the Inspection alone and the locks have been changed there will be a $100.00 inconvenience fee. Further if any pets are not either removed or caged for the appointment when Landlord's Agent is performing the Inspection alone there will be a $50.00 rescheduling fee and due and payable with the following month's rent.</p>
+
+    <h4>13. Property Loss</h4>
+    <p>Landlord shall not be liable for damages to Tenant's (s') property of any type for any reason or cause whatsoever, except where such is due to Landlord's negligence. Tenant(s) agrees to obtain Tenant(s) insurance to protect household goods and personal effects, as well as liability insurance and offer proof of such on demand by Landlord's Agent. See REQUIRED INSURANCE section below.</p>
+
+    <h4>14. Indemnification</h4>
+    <p>Tenant(s) release(s) Landlord from liability for and agrees to indemnify Landlord against all losses incurred by Landlord as a result of: (a) Tenant's (s') failure to fulfill any condition of this Lease Agreement; (b) any damage or injury happening in or about house or premises to Tenant's (s') invitee(s) or licensees or such person's property; (c) Tenant's (s') failure to comply with any requirements imposed by any governmental authority; and, (d) any judgment, lien, or other encumbrance filed against residence as a result of Tenant's (s') action(s).</p>
+
+    <h3>1.5 Drug Free Property</h3>
+    <p>In consideration of the execution (or renewal) of this original Lease Agreement, the Tenant(s) agree as follows: Tenant(s); any member of the Tenant's (s') household, guest of Tenant's (s'), or, any other person under the Tenant's (s') control:</p>
+    <ol class="alphalist">
+      <li>SHALL NOT engage in ANY criminal activity, including drug-related criminal activity, on, near, or within sight of the rental premises. Drug-related criminal activity means the "illegal manufacture, sale, distribution, transportation, or use of controlled substance" (as defined in section 102 of the Controlled Substances Act (21 U.S.C 802).</li>
+      <li>SHALL NOT engage in any act intended to facilitate criminal activity, including drug-related criminal activity, on, near or within sight of the premises.</li>
+      <li>WILL NOT permit the dwelling unit inside or out to be used for, or to facilitate criminal activity, including drug related criminal activity, regardless of whether the individual engaging in such activity is a member of the household or a guest.</li>
+      <li>WILL NOT engage in the manufacture, sale, storage, transportation, use, possession or distribution of illegal drugs and/or drug paraphernalia at any location, whether on, near or within sight of the premises or otherwise.</li>
+      <li>SHALL NOT engage in acts of violence or threats of violence, including, but not limited to, the unlawful discharge of firearms, on, near or within sight of the premises.</li>
+      <li>VIOLATION OF THE ABOVE PROVISIONS SHALL BE A MATERIAL VIOLATION OF THE RENTAL AGREEMENT AND GOOD CAUSE FOR TERMINATION OF TENANCY. A single violation of any of the provisions of this addendum shall be deemed a serious violation and material noncompliance with this Lease Agreement. It is understood and agreed that a single violation shall be good cause for termination of this Lease Agreement. Unless otherwise provided by law, proof of violation shall not require criminal conviction, but shall be a preponderance of the evidence.</li>
+      <li>In case of conflict between the provisions of this Addendum and any other provisions contained herein of this Lease Agreement, the provisions of this Addendum shall govern.</li>
+    </ol>
+
+    <h3>1.6 Casualty Clause</h3>
+    <p>If the residence listed herein, or any part thereof, shall at any time during the term to this Lease Agreement, be destroyed by fire, which is determined not the fault of Tenant(s), or by storm, then the payment of the rent hereby reserved, or a proportionate part thereof, according to the extent of the damage incurred, shall be suspended until the residence shall have been reinstated and rendered fit for habitation.</p>
+
+    <h3>1.7 Smoke Detector &amp; Fire Extinguisher</h3>
+    <h4>Smoke Detector</h4>
+    <p><strong>Repair.</strong> Tenant(s) agree that it is their duty to regularly test the smoke detector(s) and agree to notify Landlord or Landlord's Agent immediately in writing of any problem, defect, malfunction or failure of the smoke detector(s). Landlord or Landlord's Agent shall repair or replace the smoke detector(s), assuming the availability of labor and materials in the event Tenant(s) notify Landlord or Landlord's Agent of any defect in writing.</p>
+    <p><strong>Maintenance.</strong> Tenant(s) agree to replace the smoke detector(s) battery, if any, at any time the existing battery becomes unserviceable.</p>
+    <p><strong>Replacement.</strong> Tenant(s) agree to reimburse Landlord and/or Landlord's Agent upon request, for the cost of a new smoke detector(s) and the installation thereof in the event the existing smoke detector(s) becomes damaged by Tenant(s) and/or Tenant's (s') guests or invitees.</p>
+    <p><strong>Disclaimer.</strong> Tenant(s) acknowledge and agree that the Property Owner, Landlord, Landlord's Agent, Employees, and/or Property Owner is/are not the operator(s), manufacturer(s), distributor(s), retailer(s), or supplier(s) of the smoke detector(s); and, tenants herein assume full and complete responsibility for all risk and hazards attributable to, connected with, or in any way related to the operation, malfunction, and/or failure of the smoke detector(s), regardless of whether such malfunction or failure is attributable to, connected with, or in any way related to the use, operation, manufacture, distribution, repair, servicing, or installation of said smoke detector(s).</p>
+    <p>No representation, warranties, undertakings or promises, whether oral or implied, or otherwise, have been made by Property Owner, Landlord, Landlord's Agent, or Employees, to the Tenant(s) regarding said smoke detector(s), or the alleged performance of the same; Property Owner, Landlord, Landlord's Agent, or Employees, neither makes nor adopts any warranty of any nature regarding said smoke detector(s) and expressly disclaims all warranties of fitness for a particular purpose, of habitability, or any and all other expressed or implied property caused by: Tenant's (s') failure to regularly test the smoke detector(s); failure to notify Property Owner, Landlord, Landlord's Agent, or Employees of any problem, defect, malfunction, or failure of the smoke detector(s); and/or theft of the smoke detector(s) or its serviceable battery; and/or false alarms produced by the smoke detector(s).</p>
+
+    <h4>Fire Extinguisher</h4>
+    <p>Fire extinguishers are not required by Florida law to be provided to tenants and Tenant acknowledges Landlord has not furnished a fire extinguisher. Landlord encourages Tenant to procure a fire extinguisher, and to that end Tenant may purchase at Tenant's cost a fire extinguisher and shall be solely responsible for its upkeep and operability. Tenant agrees that any use of any fire extinguisher by Tenant shall be at Tenant's sole risk and Tenant assumes all risk and liability related to said use. In the event Tenant discharges a fire extinguisher within or about the Premises, Tenant shall notify Landlord and report the use of the fire extinguisher equipment immediately thereafter.</p>
+
+    <h3>1.8 Rules and Regulations</h3>
+    <ol class="alphalist">
+      <li><strong>Locks:</strong> Tenant(s) is/are prohibited from adding locks to, changing, or in any way altering locks installed on the doors of residence without written permission of Landlord.</li>
+      <li>Non-operative vehicles are not permitted on premises. Any such non-operative vehicle may be removed by Landlord at the expense of Tenant(s) owning same for storage, and/or, public and/or private sale, at Landlord's option; and, Tenant(s) owning same, shall have no right of recourse against Landlord thereafter.</li>
+      <li><strong>Storage/Attic:</strong> No goods or material of any kind, or description, which are combustible or would increase risk of fire shall be taken or placed in storage areas. Storage in such areas shall be Tenant's (s') risk and Landlord shall not be responsible for any loss or damage. Tenant is not permitted to access, enter or store any items in any crawl spaces, attics or any locked areas on the premises without prior written permission from landlord.</li>
+      <li><strong>Walls:</strong> No nails, screws or adhesive hangers except standard picture hooks, shade blind brackets, and curtain rod brackets may be placed in wall, woodwork, or any part of residence.</li>
+      <li>The Tenant(s) agree(s) to maintain the property in as good of a state as Tenant(s) finds it upon move-in. Reasonable wear and tear is expected. GOOD HOUSEKEEPING IS EXPECTED FROM EVERYONE. Tenant(s) agrees to keep their quarters in a clean and sanitary condition; and, in the case that the quarters are either a single house or a duplex, to keep premises yard cleaned, mowed, free of rubbish, and bushes trimmed.</li>
+      <li>Tenant(s) will be responsible for payment of all utilities to include, but not limited to: garbage, water, sewer, electricity and gas; even if bills remain in the Owner's name. Upon termination of the Lease Agreement, Tenant(s) agrees to maintain all utilities until the Move-Out Inspection is completed.</li>
+      <li>Tenant(s) shall report all maintenance to Landlord in writing, via a maintenance request through the Verandah Properties web site and will provide property manager pictures of maintenance issue.</li>
+      <li>Tenant(s) shall comply with all obligations imposed upon Tenant(s) by applicable provisions of building, housing, and/or health codes.</li>
+      <li>Tenant(s) shall conduct themselves (and require other persons on the premises to conduct themselves) in a manner that does not unreasonably disturb Tenant's (s') neighbors or constitute a breach of the peace.</li>
+      <li>At the termination of said Tenancy, the Tenant(s) shall quietly yield up said residence and grounds in as good and tenantable condition, in all respects (reasonable wear and use and damage by fire and other unavoidable causes excepted) as at the time of initial occupancy.</li>
+      <li>If Tenant requires a Rush Move In (less than three business days) there will be a $100.00 convenience fee.</li>
+      <li>No provisions for breaking the lease.</li>
+      <li>If a Roommate replacement is required, there will be a $100.00 processing fee.</li>
+      <li>Tenant(s) further understands and agrees that should this property be subject to the Rules and Regulations of a Homeowners Association or a Condominium Association, the Tenant(s) agree(s) to abide by all rules and regulations set forth by the Association. If the Landlord's Agent receives an HOA violation letter which is tenant related, there will be a $75.00 HOA convenience fee charged to tenant for managing and closing out the violation. Tenant agrees to pay this fee along with the following month's rent. Should an HOA violation letter, which is tenant related, be received at our office and requires a 7 Day Notice to Cure to be posted, a $500.00 fee will be assessed and will be due with the following month's rent. (NOTE: when an HOA violation notice is received we will reach out to you, the tenant, to ask that you remedy it right away and provide to us a digital picture of proof of such so that it can be delivered, through us, to the HOA; if you follow this immediately, a 7 Day Notice to Cure will not be necessary, nor will the $500.00 fee be due and payable.)</li>
+      <li>Tenant(s) understands their obligation to make the property available to show to potential tenants/purchasers; any failure to comply or hinder the showing of the property during the appropriate time will constitute the tenant putting their security deposit refund at risk. Tenant will be required during the last 60 days of their lease, to make the property available to show. If the Tenant(s) does not schedule the Landlord's Agent showings as requested and required by the Landlord's Agent, there will be a $500.00 inconvenience fee due and payable with the following month's rent, or it will be deducted from the Tenant(s) security deposit. Tenant(s) agree to this deduction if appropriate as outlined in this paragraph.</li>
+      <li><strong>Prohibited Outdoor Recreational/Play Equipment.</strong> Tenant shall not install, use or otherwise allow to be brought onto the Premises, either temporarily or permanently, any of the following: (i) above-ground pool; (ii) trampoline (both above and in-ground); (iii) inflatable bounce house or water slide; (iv) swing set/jungle gym; (v) tree house; (vi) fire pits of any kind; and (vii) any other recreational, play or outdoor equipment or items that could reasonably be considered an attractive nuisance or that would cause a suspension or cancellation of insurance coverage or an increase in insurance premiums. For purposes of this provision, an "attractive nuisance" shall mean any item or condition which if brought onto or allowed to exist on the Premises would likely entice or otherwise attract children onto the Premises potentially putting their safety in danger.</li>
+      <li>Should Tenant(s) choose to utilize their own washer and dryer, installation and removal of these units must be conducted by a qualified professional to mitigate the risk of property damage, particularly flooding. Tenant(s) may select a service provider of their choosing, so long as the provider is licensed and insured. Tenant(s) agree to furnish proof of professional installation and removal upon Landlord's request. Tenant(s) will be held responsible for any damages to the property resulting from non-professional installation or removal of the washer and dryer appliances.</li>
+      <li>
+        <strong>Attic Access and Use.</strong> The Tenant acknowledges and agrees that the attic area of the Property is not to be accessed, entered, or used for any purpose whatsoever, including but not limited to storage, inspection, or maintenance.
+        <p>The Tenant understands that:</p>
+        <ul>
+          <li>Not all attics are designed or constructed to support storage or foot traffic.</li>
+          <li>Accessing the attic may pose significant safety risks, including the potential for falling, personal injury, or property damage.</li>
+          <li>Any entry into or use of the attic by the Tenant, occupants, or guests is strictly prohibited and shall constitute a material violation of this Lease.</li>
+        </ul>
+        <p>The Tenant further agrees that the Owner and Property Manager shall not be held liable for any injury, loss, or damage resulting from unauthorized access to or use of the attic area.</p>
+      </li>
+    </ol>
+
+    <h3>1.9 Additional Details</h3>
+
+    <h4>Non-Smoking</h4>
+    <p>It is hereby understood that Tenant(s) agree(s) to a non-smoking environment in the above referenced property. Failure to abide may cause Tenant(s) to incur expenses such as, but not limited to, carpet replacement, window covering replacement, interior painting and/or wall-papering, and AC service (duct work cleaning, etc.), which, if necessary, will be retained from security deposit.</p>
+
+    <h4>Septic Tank (If applicable)</h4>
+    <p>Tenant(s) acknowledges by signature below that they agree to, and understand the necessity of, add "Rid X" to one household toilet, one (1) time per each month, or every thirty (30) days, during the duration of the above referenced lease. Furthermore, the Tenant(s) agrees that should the Tenant(s) fail to perform to these specifications, and in the event that the septic system sustains damage and thus needs repairs from the Tenant's (s') failure to perform to these specifications, that the Landlord or Landlord's Agent will hold the Tenant(s) responsible for the cost of repair and/or replacement of the septic system, which, if necessary, will be retained from security deposit.</p>
+
+    <h4>Abandoned Property</h4>
+    <p>Any and all property of Tenant's (s') which may be left in the residence, after termination of this Lease Agreement of Tenant's (s') Right of Possession, for any reason, may be handled, removed, and/or otherwise disposed of, by Landlord, at the risk and expense of Tenant(s); and, Landlord shall in no event be responsible for any property left in the residence by Tenant(s). Tenant(s) shall pay to Landlord, upon demand, all expenses incurred in such disposition, including a reasonable charge for storage; but, Landlord shall be under no obligation to provide storage; and, Tenant(s) hereby expressly consent(s) to the safe removal, discard, and/or any other disposition of the property, by the Landlord.</p>
+    <div class="legal-notice">
+      By signing this rental agreement, the Tenant(s) agrees that upon surrender or abandonment, as defined by the Florida Statutes, the Landlord shall not be liable or responsible for storage or disposition of the Tenant's (s') personal property. Also by signing this rental agreement, the Tenant agrees that upon surrender, abandonment, or recovery of possession of the dwelling unit due to the death of the last remaining tenant, as provided by Chapter 83, Florida Statutes, the Landlord shall not be liable or responsible for storage or disposition of the Tenant's personal property.
+    </div>
+
+    <h4>Radon Gas Disclosure</h4>
+    <p>Radon is a naturally occurring radioactive gas that, when it has accumulated in a building in sufficient quantities, may present health risks to persons who are exposed to it over extended periods of time. Levels of radon that exceed Federal and State guidelines have been found in buildings in Florida. Additional information regarding radon and radon testing may be obtained from county public health units.</p>
+
+    <h4>Repairs</h4>
+    <p>Tenant(s) acknowledges that Tenant(s) has/have inspected the residence and accepts the condition as is. Landlord will make necessary repairs to residence with reasonable promptness after receipt of written notice from Tenant(s) for major deficiencies, which create unsafe or untenantable conditions. Major repairs shall include electrical, plumbing, heating, cooling, built-in appliances, and/or structural defects. Tenant(s) shall make, or cause to be made, all incidental repairs other than above. If any damages, beyond normal wear and tear, are caused by Tenant(s) and/or Tenant's (s') guest(s), Tenant(s) agrees to pay Landlord the cost of repair with the next rental payment. Tenant(s) may not remodel, or structurally change residence (interior or exterior), nor remove any fixture without written authority from Landlord.</p>
+
+    <h4>Flotation Bedding</h4>
+    <p>In the event Tenant(s) use(s) a flotation bedding system in the residence, and, provided that the flotation bedding system is not violative of applicable building codes, the Landlord will require Tenant(s) to carry in the Tenant(s)'s name Flotation Insurance, as is standard in the industry in an amount deemed reasonable to protect the Tenant(s) and Owner against personal injury and property damage to the residence. In any case the policy shall carry a loss payable clause to the Owner of the residence.</p>
+
+    <h3>1.10 Military Transfer</h3>
+    <p>In event Tenant(s) is/are in the Military Service and Tenant(s) furnishes Landlord evidence of Military Transfer, then Landlord shall return the Security Deposit, in its entirety, to Tenant(s), with the exception of any damage claims to Security Deposit, which may apply.</p>
+
+    <h3>1.11 Special Stipulations</h3>
+    <ol class="alphalist">
+      <li>Tenant(s) acknowledges that the statements and representations made in the signed application for said residence are true and they are deemed a part of this Lease Agreement and that the falsity of any of them constitutes a breach hereof.</li>
+      <li>
+        Additional provisions, and/or special provisions, in the attached Addendums, bearing the signatures of all parties concerned, are hereby made a part of this Lease Agreement:
+        <ul>
+          <li>Additional Terms and Conditions</li>
+          <li>Pet Addendum</li>
+          <li>Guaranty of Lease</li>
+        </ul>
+      </li>
+      <li>After tenant has been checked into the property and a reasonable time has passed, the tenant is then expected to take care of minor repairs at the home. Tenants understand that it is their responsibility to report any maintenance that is the owner's responsibility to the Verandah Properties, as soon as it's noticed. If tenant does not report the maintenance needed in a timely manner, they will be financially responsible for any deferred maintenance which occurs due to their neglect. If the refrigerator has a filter that must be changed tenant will do so at their expense. If the property has a water softener, tenant will add salt as needed at their own expense. Owner will not repair security system, if any, in property.</li>
+      <li>If applicable. Lease is void unless the HOA application has been approved by the current HOA.</li>
+      <li>In the event a condominium association or homeowner's association is currently providing any services to the unit such as cable, satellite TV, alarm monitoring, internet, water, sewer, trash, guarded security gate or other services, and the association decides these services will no longer be provided, Tenant agrees and understands that Landlord and/or Agent shall not be required to replace, provide or pay for these removed services for Tenant. Tenant may opt to pay for non-essential services, but shall be required to pay for essential services including but not limited to water, sewer and trash, if the association no longer provides these services. The discontinuation of any such services by the association shall not be construed as a prohibited practice by Landlord or Agent, nor shall it constitute a default under the lease. The failure of Tenant to retain and pay for essential services upon notice and demand by the Landlord or Agent shall constitute a material breach of the lease.</li>
+      <li>Lease Special Stipulation</li>
+    </ol>
+
+    <div class="initial-block">
+      <p>By initialing below, you acknowledge and agree to the terms in Section 1.</p>
+      <span class="sig-label">Initial Here</span>
+      <div class="initial-line">X</div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2 ============ -->
+  <section id="section-2">
+    <h2>2. Required Insurance</h2>
+    <h3>2.1 Required Insurance — Addition to Lease Agreement</h3>
+    <p>For the duration of the Lease Agreement, Tenant is required to maintain and provide the following minimum required insurance coverage:</p>
+    <ul>
+      <li>$100,000 Limit of Liability for Lessee's legal liability for damage to the landlord's property for no less than the following causes of loss: fire, smoke, explosion, water damage, backup or overflow of sewer, drain or sump ("Required Insurance").</li>
+    </ul>
+    <p>Tenant is required to furnish Verandah Properties, LLC with evidence of Required Insurance prior to occupancy of leased premises and at the time of each lease renewal period. If at any time, Tenant does not have Required Insurance, Tenant is in breach of the Lease Agreement and landlord shall have, in addition to any other rights under the Lease Agreement, the right but not the obligation to purchase Required Insurance coverage and seek reimbursement from the Tenant for all costs and expenses associated with such purchase.</p>
+    <p>Tenant may obtain Required Insurance from an insurance agent or insurance company of Tenant's choice and is required to list Verandah Properties, LLC as an interested party to the policy. If Tenant furnishes evidence of such insurance and maintains the insurance for the duration of the Lease Agreement, then nothing more is required. If Tenant does not maintain Required Insurance, the insurance requirement of this Lease Agreement may be satisfied by Landlord, who may schedule the Tenant's unit for coverage under the Landlord's Required Resident Liability insurance policy ("LRRL"). The coverage provided under the LRRL will provide the Required Insurance coverage listed above. An amount equal to the total cost to the Landlord for the LRRL coverage shall be charged to Tenant by the Landlord. Some important points of this coverage, which tenant should understand are:</p>
+    <ol>
+      <li>LRRL is designed to fulfill the insurance requirement of the Lease Agreement. Tenant is the Insured under the LRRL. Tenant is not the insured under the LRRL policy.</li>
+      <li>LRRL coverage is not personal liability insurance or renter's insurance. Landlord makes no representation that LRRL covers the Tenant's additional living expenses or liability arising out of bodily injury or property damage to any third party. If Tenant requires any of these coverages, then</li>
+      <li>Tenant should contact an insurance agent or insurance company of Tenant's choice.</li>
+      <li>Coverage under the LRRL policy may be more expensive than the cost of Required Insurance obtainable by Tenant elsewhere. At any time, Tenant may contact an agent of their choice for insurance options to satisfy the Required Insurance under this Lease Agreement.</li>
+      <li>Licensed insurance agents may receive a commission on the LRRL policy.</li>
+      <li>The cost to the Lessee for the LRRL coverage shall be nine dollars and fifty cents Dollars ($10.50) per month. Additionally, an Administration Fee in the amount of Three Dollars ($3.00) to be retained by Verandah Properties, LLC for processing and handling will be charged.</li>
+    </ol>
+    <p>Scheduling under the LRRL policy is not mandatory and Tenant may purchase Required Insurance from an insurance agent or insurance company of Tenant's choice at any time and coverage under the LRRL policy will be terminated by the Landlord.</p>
+
+    <div class="initial-block">
+      <p>By initialing below, you acknowledge and agree to the terms in Section 2.</p>
+      <span class="sig-label">Initial Here</span>
+      <div class="initial-line">X</div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 3 ============ -->
+  <section id="section-3">
+    <h2>3. Maintenance Responsibility</h2>
+    <h3>3.1 Maintenance Responsibility</h3>
+    <p>All rental properties are inspected prior to each occupancy and either videotaped, or pictures are digitally taken. We will use the move in videotape or pictures as evidence of the condition of the property at move in. Defective plumbing, heating and air conditioning, appliances, etc., should be noted separately for immediate attention.</p>
+
+    <p><strong>During occupancy, the Tenant is responsible, at the Tenant's expense, for any and all minor repairs.</strong> These repair responsibilities include, but are not limited to:</p>
+
+    <h4>Pest</h4>
+    <p>The Tenant, at the Tenant's expense, is responsible for the regular extermination of ants, roaches, mice, bedbugs and other pests, unless otherwise stated in the lease.</p>
+
+    <h4>Plumbing</h4>
+    <p>The Tenant is responsible for drain stoppages not attributable to plumbing defects, such as tree roots, defective septic systems, etc. The Tenant should never allow grease, sanitary napkins, etc. to enter the plumbing system. The Tenant is responsible for replacement of faucet washers and toilet tank balls, flappers or chains. In the event that there is a leak around the toilet or under the bathroom and/or kitchen sink, you must turn off the water at the local shut off valve to prevent further damage. If you hear your toilet running constantly, you must turn off the local water supply valve prior to repair. The Tenant will be charged for a service call should our plumber be called for such work. <strong>Important:</strong> If your home has an open (raised) foundation with exposed pipes, you must leave faucets running slowly overnight if a hard freeze is forecast. We do not perform this service for a tenant if you are out of town. If you are, you must contact a friend or family member to accomplish this for you.</p>
+
+    <h4>Irrigation Heads</h4>
+    <p>The tenant is responsible for irrigation head replacement.</p>
+
+    <h4>Electrical</h4>
+    <p>The Tenant must replace faceplates on wall outlets, and light bulbs. Tenants must check and make sure the GFI outlet/breaker box has not been tripped in the event that some switches and/or electrical equipment are not working. During partial or full power outages, contact the power company first to ensure there are no local outages in your area.</p>
+
+    <h4>Heating and Air Conditioning</h4>
+    <p>The Tenant must replace A/C filters at Tenant's expense. Tenants are responsible to pour a cup full of 50% hot water and 50% white vinegar mixture down the drain line each month to prevent clogging. (Note: This should be among the first items checked upon move in.) Be sure to check all switches, controls, circuit breakers and reset buttons before calling to report a malfunction. If the a/c is leaking you must immediately turn off the air conditioning unit to reduce further damage, and then contact management for repairs.</p>
+
+    <h4>Appliances</h4>
+    <p>The Tenant is responsible for the proper use and maintenance of all appliances. The Tenant will be charged for service calls resulting from misuse or failure to check something obvious such as being plugged in, tripped circuit breaker or reset button, etc. Tenant will be charged for any repairs due to Tenant's negligence or misuse.</p>
+
+    <h4>Garage Door Openers</h4>
+    <p>If your garage door is not opening, you must check that the 'sensors' are aligned – this means that if the sensors (at the bottom interior corners of the door frame) are blinking you need to adjust them so that the lights are solid.</p>
+
+    <h4>General</h4>
+    <p>We expect Tenants to treat their home as their own (would you pay a plumber $85 to replace a toilet flapper or a Electrician $125 to push a reset button or plug in a refrigerator?) The labor portion of any service call for work that could have reasonably been performed by the Tenant, or is caused by Tenant neglect or misuse, will be charged to the Tenant. The Tenant is solely responsible for any damage to the premises caused by vandalism or accident, that is, broken windows, etc. Major damage caused by storms, etc. may be covered by the Owner's insurance. If the tenant makes an appointment with a Vendor and fails to meet the Vendor for the appointment, the tenant will be charged a service charge in the amount of $75.00. The Tenant must carry Tenant insurance, as the Owner's insurance will not cover the tenant's personal belongings, such as televisions, stereo, etc.</p>
+
+    <div class="initial-block">
+      <p>By initialing below, you acknowledge and agree to the terms in Section 3.</p>
+      <span class="sig-label">Initial Here</span>
+      <div class="initial-line">X</div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 4 ============ -->
+  <section id="section-4">
+    <h2>4. Mold Addendum</h2>
+    <h3>4.1 Mold Addendum to Lease</h3>
+
+    <h4>Mold</h4>
+    <p>Mold consists of naturally occurring microscopic organisms which reproduce by spores. Mold breaks down and feeds on organic matter in the environment. The mold spores spread through the air and the combination of excessive moisture and organic matter allows for mold growth. Not all, but certain types and amounts of mold can lead to adverse health effects and/or allergic reactions. Not all mold is readily visible, but when it is, can often be seen in the form of discoloration, ranging from white to orange and from green to brown and black, and often there is a musty odor present. Reducing moisture and proper housekeeping significantly reduces the chance of mold and mold growth.</p>
+
+    <h4>Climate Control</h4>
+    <p>Tenant(s) agree to use all air-conditioning, if provided, in a reasonable manner and use heating systems in moderation and to keep the premises properly ventilated by periodically opening windows to allow circulation of fresh air during dry weather only. <strong>OWNER OR AGENT RECOMMENDS THAT AIR CONDITIONING IS USED AT ALL TIMES IF UNIT HAS AIR CONDITIONING.</strong></p>
+
+    <h4>Tenant(s) Agree To</h4>
+    <ul>
+      <li>Keep the premises clean and regularly dust, vacuum and mop.</li>
+      <li>Use hood vents when cooking, cleaning and dishwashing.</li>
+      <li>Keep closet doors ajar.</li>
+      <li>Avoid excessive amounts of indoor plants.</li>
+      <li>Use exhaust fans when bathing/showering and leave on for a sufficient amount of time to remove moisture.</li>
+      <li>Use ceiling fans if present.</li>
+      <li>Water all indoor plants outdoors.</li>
+      <li>Wipe down any moisture and/or spillage.</li>
+      <li>Wipe down bathroom walls and fixtures after bathing/showering.</li>
+      <li>Wipe down any vanities/sink tops.</li>
+      <li>Avoid air drying dishes.</li>
+      <li>Not "hang-dry" clothes indoors.</li>
+      <li>Open blinds/curtains to allow light into premises.</li>
+      <li>Wipe down floors if any water spillage.</li>
+      <li>Hang shower curtains inside bathtub when showering.</li>
+      <li>Securely close shower doors if present.</li>
+      <li>Leave bathroom and shower doors open after use.</li>
+      <li>Use dryer if present for wet towels.</li>
+      <li>Use household cleaners on any hard surfaces.</li>
+      <li>Remove any moldy or rotting food.</li>
+      <li>Remove garbage regularly.</li>
+      <li>Wipe down any and all visible moisture.</li>
+      <li>Wipe down windows and sills if moisture present.</li>
+      <li>Inspect for leaks under sinks.</li>
+      <li>Check all washer hoses if applicable.</li>
+      <li>Regularly empty dehumidifier if used.</li>
+    </ul>
+
+    <h4>Tenant(s) Shall Report in Writing</h4>
+    <ul>
+      <li>Regularly empty dehumidifier if used.</li>
+      <li>Visible or suspected mold.</li>
+      <li>All A/C heating problems or spillage.</li>
+      <li>Plant watering overflows.</li>
+      <li>Musty odors, showing/bath/sink/toilet overflows.</li>
+      <li>Leaky faucets, plumbing, pet urine accidents.</li>
+      <li>Discoloration of walls, baseboards, doors, window frames, ceiling.</li>
+      <li>Moldy clothes, refrigerator and A/C drip pan overflows.</li>
+      <li>Moisture dripping from or around any vents, A/C condenser lines.</li>
+      <li>Loose, missing or failing grout or caulk around tubs, showers, sinks, faucets, countertops, clothes dryer vent leaks.</li>
+      <li>Any and all moisture.</li>
+    </ul>
+
+    <h4>Small Areas of Mold</h4>
+    <p>If mold has occurred on a small non-porous surface such as ceramic tile, formica, vinyl flooring, metal or plastic and the mold is not due to an ongoing leak or moisture problem. Tenant agrees to clean the areas with soap (or detergent) and a small amount of water, let the surface dry, and then within 24 hours apply a non staining cleaner such as Lysol Disinfectant, Pine-Sol Disinfectant (original pine-scented), Tilex Mildew Remover, or Clorox Cleanup.</p>
+
+    <h4>Termination of Tenancy</h4>
+    <p>Owner or agent reserves the right to terminate the tenancy and TENANT(S) agree to vacate the premises in the event owner or agent in its sole judgment feels that either there is mold or mildew present in the dwelling unit which may pose a safety or health hazard to TENANT(S) or other persons and/or TENANT(S) actions or inactions are causing a condition which is conducive to mold growth.</p>
+
+    <h4>Inspections</h4>
+    <p>TENANT(S) agree that Owner or agent may conduct inspections of the unit at any time with reasonable notice.</p>
+
+    <h4>Violation of Addendum</h4>
+    <p>IF TENANT(S) FAIL TO COMPLY WITH THIS ADDENDUM, Tenant(s) can be held responsible for property damage to the dwelling and any health problems that may result. Noncompliance includes but is not limited to Tenant(s) failure to notify Owner or Agent of any mold, mildew or moisture problems immediately IN WRITING. Violation shall be deemed a material violation under the terms of the Lease, and owner or agent shall be entitled to exercise all rights and remedies it possesses against TENANT(S) at law or in equity and TENANT(S) shall be liable to Owner for damages sustained to the Leased Premises. TENANT(S) shall hold Owner and agent harmless for damage or injury to person or property as a result of TENANT(S) failure to comply with the terms of this addendum.</p>
+
+    <h4>Hold Harmless</h4>
+    <p>If the premises is or was managed by an agent of the Owner, TENANT(S) agree to hold Agent and its employees harmless and shall look solely to the property Owner in the event of any litigation or claims concerning injury, damage or harm suffered due to mold or mildew.</p>
+
+    <h4>Parties</h4>
+    <p>This Addendum is between the Tenant(s) and Owner and or Agent managing the premises. This Addendum is in addition to and made part of the Lease Agreement and in the event there is any conflict between the Lease and this Addendum, the provisions of this Addendum shall govern.</p>
+
+    <div class="initial-block">
+      <p>By initialing below, you acknowledge and agree to the terms in Section 4.</p>
+      <span class="sig-label">Initial Here</span>
+      <div class="initial-line">X</div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 5 ============ -->
+  <section id="section-5">
+    <h2>5. Resident Benefits Package</h2>
+    <h3>5.1 Resident Benefits Package</h3>
+    <p>The Verandah Properties, LLC Resident Benefits Package (RBP) delivers savings and convenient, professional services that make taking care of your home second nature at a cost of <strong>$30/month payable with Rent</strong>.</p>
+    <p>Tenant and Landlord mutually agree that the Resident Benefits Package is defined as follows and variations of inclusions may exist due to property specifications. The total monthly cost of the Resident Benefits Package is all-inclusive and no discounts will be given in any element(s) of the package is unavailable due to a lack of HVAC or other property-specific limitation.</p>
+
+    <h4>HVAC Filter Delivery</h4>
+    <p>A portion of Tenant's total amount due will be used to have HVAC filters delivered to their home approximately every 60 days, or as required by your HVAC system. Tenant shall properly install the filter that is provided within two (2) days of receipt. Tenant hereby acknowledges that the filters will be dated and subject to inspection by Landlord upon reasonable notice to verify replacement has been timely made. If at any time Tenant is unable to properly or timely install a filter, Tenant shall immediately notify Landlord in writing. Tenant's failure to properly and timely replace the filters is a material breach of this agreement and Landlord shall be entitled to exercise all rights and remedies it has against Tenant and Tenant shall be liable to Landlord for all damages to the property or HVAC system caused by Tenant's neglect or misuse. Landlord may charge a trip fee to perform the filter change, as required, at Tenant expense.</p>
+
+    <h4>Utility Concierge Service</h4>
+    <p>Tenant acknowledges that Landlord will make available a concierge service to Tenant to aid in utility, cable, internet, and other relevant service(s) activation. Tenant maintains the right to facilitate his/her own service activations.</p>
+
+    <h4>Tenant Rewards</h4>
+    <p>Tenant acknowledges that a Tenant rewards program is made available to them by Landlord. Rewards are to be accessed online and are activated at Tenant's sole discretion through use of a mobile application. Rewards will provide Tenant with available rewards as a preferred customer of Landlord.</p>
+
+    <h4>Home Buying Assistance</h4>
+    <p>Landlord is a Licensed Real Estate Agent and/or Broker and offers buyer representation services and referrals to Tenants enrolled in the Resident Benefits Package for the purchase of real property. Compensation and detail of such services shall be agreed upon in a separate Agreement outside of this Lease.</p>
+
+    <h4>24-Hour Maintenance Coordination Service</h4>
+    <p>Landlord shall allow access to Tenant to report maintenance concerns outside of normal business hours via the online Tenant portal, or other such means as made available by Landlord.</p>
+
+    <h4>Online Portal Access</h4>
+    <p>Landlord agrees to provide Tenant online portal access for the purposes of reviewing pertinent documents, payment of Rent and other fee(s), and reporting maintenance concerns. Landlord reserves the right to restrict payment access to Tenant, at Landlord's sole discretion, should a pattern of delinquency arise and/or persist.</p>
+
+    <h4>Periodic Preventative Maintenance Walk Through</h4>
+    <p>Landlord will arrange for periodic professional inspections to be conducted by an approved third-party vendor(s) with preventative maintenance in-mind. Tenant shall make Property available to Landlord and such vendors with reasonable notice.</p>
+
+    <h4>Multiple Payment Options</h4>
+    <p>All rental payments can be paid in a variety of ways using your Resident portal. Available options include ACH, debit and credit cards, along with participating retailers (as applicable to participation and associated fees). Restrictions of payment methods by the Landlord are permissible should a pattern of delinquency arise and/or persist.</p>
+
+    <h4>Vetted Vendors</h4>
+    <p>Landlord will ensure all third party vendors are appropriately licensed, bonded, and insured.</p>
+
+    <h4>Credit Reporting</h4>
+    <p>Landlord provides credit reporting to cast both negative and positive payment history through a third-party service. Landlord is not responsible for any misrepresentation, erroneous reporting, or lack of reporting by the third-party service. Tenant understands that any disputes will be handled directly between Tenant and the third-party service.</p>
+
+    <h4>One-time Waiver of Late or NSF Fee</h4>
+    <p>Landlord shall permit a one-time waiver of either a late fee or an NSF fee. Tenant shall notify Landlord before the payment is late or NSF to qualify. Allowance of waiver is at the discretion of the Landlord.</p>
+
+    <h4>No Hassle Move-in/Out</h4>
+    <p>No need to come by the office to move in or move out. Tenant shall pick up and leave the keys at the property and everything else will be handled, conveniently, online.</p>
+
+    <h4>Parties</h4>
+    <p>This Addendum is between the Tenant(s) and Owner and or Agent managing the premises. This Addendum is in addition to and made part of the Lease Agreement and in the event there is any conflict between the Lease and this Addendum, the provisions of this Addendum shall govern.</p>
+
+    <div class="initial-block">
+      <p>By initialing below, you acknowledge and agree to the terms in Section 5.</p>
+      <span class="sig-label">Initial Here</span>
+      <div class="initial-line">X</div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 6 ============ -->
+  <section id="section-6">
+    <h2>6. Sign and Accept</h2>
+    <h3>6.1 Entire Agreement</h3>
+    <p>This Lease Agreement and any attached and subsequent Addendums constitute the entire Lease Agreement between all concerned parties, herein, and no oral statements shall be binding.</p>
+    <p>IN WITNESS WHEREOF, the parties hereto have caused these present, to be signed, in person or by a person duly authorized, the day and year first above written. We acknowledge that we are each, jointly and severally, responsible for performance of, and have read and understand, all covenants, terms, and conditions of this Lease Agreement and any Addendums herein and hereafter attached.</p>
+
+    <div class="signature-block">
+      <div>
+        <div class="sig-field">X</div>
+        <span class="sig-label">Lessee</span>
+      </div>
+      <div>
+        <div class="sig-field"></div>
+        <span class="sig-label">Date Signed</span>
+      </div>
+      <div>
+        <div class="sig-field">X</div>
+        <span class="sig-label">Lessor</span>
+      </div>
+      <div>
+        <div class="sig-field"></div>
+        <span class="sig-label">Date Signed</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  Verandah Properties, LLC • 4767 New Broad Street • Orlando, FL 32814 • (407) 855-0331
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+<script>
+  // Nav menu toggle
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+
+  navToggle.addEventListener('click', () => {
+    const isOpen = navMenu.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+
+  // Close menu when a section link is clicked
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navMenu.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+
+  // Back to top button
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      backToTop.classList.add('visible');
+    } else {
+      backToTop.classList.remove('visible');
+    }
+  });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
